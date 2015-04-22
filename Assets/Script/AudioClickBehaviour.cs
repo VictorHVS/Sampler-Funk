@@ -25,7 +25,7 @@ public class AudioClickBehaviour : MonoBehaviour {
 	}
 	public void ClickFx() {
 		sound.Play ();
-		StartCoroutine (SomeCoroutine());
+		//StartCoroutine (SomeCoroutine());
 	}
 
 	IEnumerator SomeCoroutine () {
