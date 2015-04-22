@@ -25,13 +25,6 @@ public class AudioClickBehaviour : MonoBehaviour {
 	}
 	public void ClickFx() {
 		sound.Play ();
-		//StartCoroutine (SomeCoroutine());
 	}
-
-	IEnumerator SomeCoroutine () {
-		yield return new WaitForSeconds (0.5F);
-		if (sound.isPlaying)
-			sound.Stop ();
-		sound.Play ();
-	}
+	
 }

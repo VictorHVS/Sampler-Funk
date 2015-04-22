@@ -9,21 +9,23 @@ public class Sequenciador : MonoBehaviour {
 	private float startTime;
 	private bool onSequence;
 	private bool isPlaying;
+	public Text console;
 
-	//public AudioSource tocadorDefault;
-	
 	void Start () {
 		sequencia = new Hashtable ();
 		onSequence = false;
 		isPlaying = false;
 	}
 
-	void Update(){
-	}
-
 	public void startSequence(){
 		onSequence = !onSequence;
 		startTime = Time.time;
+
+		if (onSequence) {
+			console.text = "Sequenciador iniciado...";
+		} else {
+			console.text = "Sequenciador finalizado...";
+		}
 	}
 
 	public void add(AudioSource aud){
@@ -35,22 +37,28 @@ public class Sequenciador : MonoBehaviour {
 
 	public void PlaySequencia(){
 		isPlaying = !isPlaying;
-		if (isPlaying) {
-			foreach ( DictionaryEntry de in sequencia ){
 
-				Debug.Log(de.Key + " - " + de.Value);
+		if (isPlaying) {
+			console.text = "Tocando sequenciador";
+			foreach (DictionaryEntry de in sequencia) {
+
+				Debug.Log (de.Key + " - " + de.Value);
 
 				AudioSource a = (AudioSource)de.Value;
-				StartCoroutine (SomeCoroutine(a, (float)de.Key));
+				StartCoroutine (SomeCoroutine (a, (float)de.Key));
 			}
+		} else {
+			console.text = "Tocando parado";
+			sequencia.Clear();
 		}
 	}
 
 	IEnumerator SomeCoroutine (AudioSource sound, float time) {
 		yield return new WaitForSeconds (time);
-
-		if (sound.isPlaying)
-			sound.Stop ();
-		sound.Play();
+		if (sound.loop) {
+			sound.GetComponent<AudioClickBehaviour> ().ClickLoop ();
+		} else {
+			sound.GetComponent<AudioClickBehaviour> ().ClickFx ();
+		}
 	}
 }

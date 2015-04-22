@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Script\AudioClickBehaviour.cs" />
-     <Compile Include="Assets\Script\ButtonBehaviour.cs" />
      <Compile Include="Assets\Script\Exit.cs" />
      <Compile Include="Assets\Script\RecoderBehaviour.cs" />
      <Compile Include="Assets\Script\Sequenciador.cs" />
